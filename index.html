@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 일괄 비교 검증 도구</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>데이터 검증 대시보드</h1>
+    <button class="btn-compare" onclick="compareData()">두 데이터 비교 분석 시작</button>
+</header>
+
+<div class="top-section">
+    <div class="input-grid">
+        <div class="textarea-wrap">
+            <label for="input1">1번 기준 데이터</label>
+            <textarea id="input1" placeholder="데이터를 붙여넣으세요..."></textarea>
+        </div>
+        <div class="textarea-wrap">
+            <label for="input2">2번 비교 데이터</label>
+            <textarea id="input2" placeholder="데이터를 붙여넣으세요..."></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="sidebar">
+        <div class="nav-card total-card">
+            <div class="card-title">전체 고유 데이터 수</div>
+            <div class="card-count" id="count-total" style="color: var(--text-color);">0</div>
+        </div>
+        <div class="nav-card match-card active" onclick="switchView('match')">
+            <div class="card-title">1. 완벽 일치 내역</div>
+            <div class="card-count" id="count-match" style="color: var(--success-color);">0</div>
+        </div>
+        <div class="nav-card diff-card" onclick="switchView('diff')">
+            <div class="card-title">2. 제목 일치 / ID 상이</div>
+            <div class="card-count" id="count-diff" style="color: var(--warning-color);">0</div>
+        </div>
+        <div class="nav-card missing-card" onclick="switchView('missing')">
+            <div class="card-title">3. 일치 제목 없음 (누락)</div>
+            <div class="card-count" id="count-missing" style="color: var(--danger-color);">0</div>
+        </div>
+    </div>
+
+    <div class="data-viewport">
+        <div class="viewport-header">
+            <h2 id="viewport-title">결과를 확인하려면 비교를 시작하세요</h2>
+        </div>
+        <div class="table-container">
+            <table id="result-table">
+                <thead id="table-head"></thead>
+                <tbody id="table-body">
+                    <tr><td class="text-muted">데이터를 기입하고 상단의 '비교 분석 시작' 버튼을 눌러주세요.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
