@@ -36,16 +36,12 @@
             <div class="card-title">1. 완벽 일치 내역</div>
             <div class="card-count" id="count-match" style="color: var(--success-color);">0</div>
         </div>
-        <div class="nav-card namemismatch-card" onclick="switchView('namemismatch')">
-            <div class="card-title">2. 데이터 일치 (파일명 상이)</div>
-            <div class="card-count" id="count-namemismatch" style="color: var(--info-color);">0</div>
-        </div>
-        <div class="nav-card contentdiff-card" onclick="switchView('contentdiff')">
-            <div class="card-title">3. 동일 작품 내용 변경</div>
-            <div class="card-count" id="count-contentdiff" style="color: var(--warning-color);">0</div>
+        <div class="nav-card diff-card" onclick="switchView('diff')">
+            <div class="card-title">2. 제목 일치 / ID 상이</div>
+            <div class="card-count" id="count-diff" style="color: var(--warning-color);">0</div>
         </div>
         <div class="nav-card missing-card" onclick="switchView('missing')">
-            <div class="card-title">4. 미매칭 (누락 데이터)</div>
+            <div class="card-title">3. 일치 제목 없음 (누락)</div>
             <div class="card-count" id="count-missing" style="color: var(--danger-color);">0</div>
         </div>
     </div>

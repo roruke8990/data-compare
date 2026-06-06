@@ -5,7 +5,6 @@
     --text-color: #212529;
     --primary-color: #0d6efd;
     --success-color: #198754;
-    --info-color: #0dcaf0;
     --warning-color: #f59e0b;
     --danger-color: #dc3545;
 }
@@ -157,8 +156,7 @@ textarea:focus {
 .total-card { border-left: 5px solid #6c757d; cursor: default; }
 .total-card:hover { transform: none; border-color: var(--border-color); }
 .match-card.active { border-left-color: var(--success-color); }
-.namemismatch-card.active { border-left-color: var(--info-color); }
-.contentdiff-card.active { border-left-color: var(--warning-color); }
+.diff-card.active { border-left-color: var(--warning-color); }
 .missing-card.active { border-left-color: var(--danger-color); }
 
 .data-viewport {
@@ -184,7 +182,7 @@ textarea:focus {
     font-size: 1.1rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* 양 끝 정렬로 시간 표기 공간 확보 */
     width: 100%;
 }
 
@@ -250,6 +248,5 @@ tr:hover { background-color: #f8f9fa; }
     margin-left: 5px;
 }
 .bg-success { background-color: var(--success-color); }
-.bg-info { background-color: var(--info-color); }
 .bg-warning { background-color: var(--warning-color); }
 .bg-danger { background-color: var(--danger-color); }
