@@ -4,6 +4,68 @@ let lastCompareTime = '';
 
 const FILENAME_SIMILARITY_THRESHOLD = 0.72;
 
+function setupTextFileDrop() {
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        const targetId = zone.dataset.target;
+        const textarea = document.getElementById(targetId);
+        const status = document.getElementById(`${targetId}-status`);
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            zone.addEventListener(eventName, event => {
+                event.preventDefault();
+                event.stopPropagation();
+                zone.classList.add('drag-over');
+                if (status) status.textContent = '파일을 놓으면 내용이 입력됩니다.';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            zone.addEventListener(eventName, event => {
+                event.preventDefault();
+                event.stopPropagation();
+                zone.classList.remove('drag-over');
+            });
+        });
+
+        zone.addEventListener('drop', event => {
+            const file = event.dataTransfer.files && event.dataTransfer.files[0];
+            const draggedText = event.dataTransfer.getData('text/plain');
+
+            if (file) {
+                const fileName = file.name || '';
+                const isTextLike = /\.(txt|csv|tsv|log)$/i.test(fileName) || /^text\//i.test(file.type || '');
+
+                if (!isTextLike) {
+                    if (status) status.textContent = 'txt, csv, tsv, log 형식의 텍스트 파일만 입력할 수 있습니다.';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    textarea.value = String(reader.result || '').replace(/^\uFEFF/, '');
+                    if (status) status.textContent = `${fileName} 입력 완료`;
+                };
+                reader.onerror = () => {
+                    if (status) status.textContent = '파일을 읽지 못했습니다.';
+                };
+                reader.readAsText(file, 'UTF-8');
+                return;
+            }
+
+            if (draggedText) {
+                textarea.value = draggedText;
+                if (status) status.textContent = '드래그한 텍스트 입력 완료';
+                return;
+            }
+
+            if (status) status.textContent = '입력할 수 있는 텍스트가 없습니다.';
+        });
+    });
+}
+
+window.addEventListener('DOMContentLoaded', setupTextFileDrop);
+
+
 function parseRawText(text) {
     const lines = text.split('\n');
     const dataList = [];
